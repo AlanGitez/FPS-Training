@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    public Vector2 moveInput { get; private set; }
+    public Vector2 moveInput;
     public bool isJump { get; private set; }
     public event Action<bool> changeCameraWasPressed;
 
@@ -46,6 +46,7 @@ public class PlayerInput : MonoBehaviour
     private void setMoveInput(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
+
     }
 
     private void setJumpInput(InputAction.CallbackContext ctx)

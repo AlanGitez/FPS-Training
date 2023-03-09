@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponController : MonoBehaviour
 {
@@ -10,32 +12,44 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     private Transform headCamera;
 
+    //[SerializeField]
+    //private OnPlayerShootEvent onPlayerShootEvent;
     [SerializeField]
-    private GameObject bulletPrefab;
+    private MouseInput _mouseInput;
+    [SerializeField]
+    private Weapon _weapon;
 
-    void Start()
-    {
-        
-    }
+    //[SerializeField]
+    //private GameObject bulletPrefab;
+
 
     private void OnEnable()
     {
-   
+        _mouseInput.onPlayerShootEvent?.AddListener(onPlayerShoot);
     }
+
 
     void Update()
     {
         //Ray ray = new Ray(shootOrigin.position, crosshair.transform.position);
         Debug.DrawRay(shootOrigin.position, headCamera.forward * rayDistance, Color.black);
 
-        if (Input.GetMouseButtonDown(0)) { 
-            
-            GameObject bullet = Instantiate(bulletPrefab);
-            bullet.transform.position = shootOrigin.position;
+        //if (Input.GetMouseButtonDown(0))
+        //{
 
-            Vector3 direction = headCamera.position + (headCamera.forward * 10f);
-            bullet.transform.LookAt(direction);
-            
-        }
+        //    GameObject bullet = Instantiate(bulletPrefab);
+        //    bullet.transform.position = shootOrigin.position;
+
+        //    Vector3 direction = headCamera.position + (headCamera.forward * 10f);
+        //    bullet.transform.LookAt(direction);
+
+        //}
     }
+
+    private void onPlayerShoot() {
+        Debug.Log("Estoy en el controller");
+        _weapon.Shoot(headCamera);
+        
+    }
+
 }

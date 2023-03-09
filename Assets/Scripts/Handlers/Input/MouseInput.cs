@@ -1,12 +1,20 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+
+[System.Serializable]
+public class OnPlayerShootEvent : UnityEvent { }
+[System.Serializable]
+public class OnPlayerAimEvent : UnityEvent { }
 
 public class MouseInput : MonoBehaviour
 {
     public Vector2 moveInput;
 
-    public event Action<bool, bool> OnClickInput;
+    //public event Action<bool, bool> OnClickInput;
+    public OnPlayerShootEvent onPlayerShootEvent;
+    public OnPlayerAimEvent onPlayerAimEvent;
 
     public bool invertMouseY = true;
 
@@ -56,10 +64,12 @@ public class MouseInput : MonoBehaviour
         bool leftClick = false;
         bool rightClick = false;
 
-        if (buttonName == "leftButton") leftClick = ctx.ReadValue<float>() == 1f;
-        else if (buttonName == "rightButton") rightClick = ctx.ReadValue<float>() == 1f;
+        if (buttonName == "leftButton" && ctx.ReadValue<float>() == 1f)
+            onPlayerShootEvent?.Invoke();
+        else if (buttonName == "rightButton" && ctx.ReadValue<float>() == 1f) 
+            onPlayerAimEvent?.Invoke();
 
-        OnClickInput?.Invoke(leftClick, rightClick);
+        //OnClickInput?.Invoke(leftClick, rightClick);
     }
 
 

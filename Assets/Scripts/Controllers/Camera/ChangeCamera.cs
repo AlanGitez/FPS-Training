@@ -1,7 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 
-public class CameraController : MonoBehaviour
+public class ChangeCamera : MonoBehaviour
 {
     public bool isOrbitalCamActive { get; private set; } = false;
 
