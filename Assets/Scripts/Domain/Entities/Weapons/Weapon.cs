@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+
+
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    public abstract int maxBullets { get; set; }
+    public abstract int currentBullets { get; set; }
     protected abstract float rateOfFire { get; set; }
-    protected abstract int shootPower { get; set; }
+    public abstract int shootPower { get; set; }
     protected abstract float reloadTime { get; set; }
     protected abstract float recoil { get; set; }
 
