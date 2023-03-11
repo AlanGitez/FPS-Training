@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
-
 
 public class PlayerInput : MonoBehaviour
 {
@@ -28,12 +25,6 @@ public class PlayerInput : MonoBehaviour
         _input.InGame.playerjump.canceled += setJumpInput;
 
         _input.InGame.inventory.started += setInventorySwitch;
-        //_input.InGame.inventory.performed += setInventorySwitch;
-        //_input.InGame.inventory.canceled += setInventorySwitch;
-
-        //_input.InGame.playerchangeCamera.started += setChangeCameraWasPressed;
-        //_input.InGame.playerchangeCamera.performed += setChangeCameraWasPressed;
-        //_input.InGame.playerchangeCamera.canceled += setChangeCameraWasPressed;
     }
 
     private void OnDisable()
@@ -46,17 +37,14 @@ public class PlayerInput : MonoBehaviour
         _input.InGame.playerjump.performed -= setJumpInput;
         _input.InGame.playerjump.canceled -= setJumpInput;
 
-        //_input.InGame.inventory.started -= setInventorySwitch;
-        _input.InGame.inventory.performed -= setInventorySwitch;
-        //_input.InGame.inventory.canceled -= setInventorySwitch;
+        _input.InGame.inventory.started -= setInventorySwitch;
 
-        //_input.InGame.playerchangeCamera.started -= setChangeCameraWasPressed;
-        //_input.InGame.playerchangeCamera.performed -= setChangeCameraWasPressed;
-        //_input.InGame.playerchangeCamera.canceled -= setChangeCameraWasPressed;
     }
 
     private void setMoveInput(InputAction.CallbackContext ctx)
     {
+        Debug.Log("input x: " + ctx.ReadValue<Vector2>().x);
+        Debug.Log("input y: " + ctx.ReadValue<Vector2>().y);
         moveInput = ctx.ReadValue<Vector2>();
 
     }

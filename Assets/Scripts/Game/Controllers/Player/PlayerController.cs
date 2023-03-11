@@ -1,6 +1,8 @@
+using Assets.Scripts.Game.Controllers.Player;
+using Assets.Scripts.Game.UseCase.Player;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ICollisionListener
 {
 
     // Attributes to control the mouse interactions.
@@ -22,10 +24,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Player _player;
 
+    // To character control
+    private IMove _move;
+    private IRotate _rotate;
+    private IJump _jump;
 
-    private void Start()
+    private Rigidbody rb;
+    private bool isJump = false;
+
+    public void Initialize(IMove move, IJump jump, IRotate rotate) {
+        _move = move;
+        _jump = jump;
+        _rotate = rotate;
+    }
+
+    private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
+
         Cursor.lockState = CursorLockMode.Locked;
+
+        PlayerCollisions playerCollisions = GetComponent<PlayerCollisions>();
+
+        if (playerCollisions != null) playerCollisions.SetCollisionListener(this);
+        
     }
 
     private void OnEnable()
@@ -41,11 +63,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _player.Rotate(getMouseMoveInput());
-    
-        _player.Move(getMoveInput());
+        Vector3 moveInput = getMoveInput();
+        Vector3 rotationInput = getMouseMoveInput();
 
-        _player.Jump(getJumpInput());
+        _move.PerformMovement(rb, moveInput, _player.movementSpeed);
+        _rotate.PerformRotation(rb, rotationInput, _player.rotationSpeed);
+
+        if (getJumpInput() && !isJump) _jump.PerformJump(rb, _player.jumpPower, out isJump);
     }
 
     private Vector3 getMoveInput() {
@@ -84,5 +108,11 @@ public class PlayerController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    // Configuramos las props segun colisiones.
+    public void OnCollide()
+    {
+        this.isJump = false;
     }
 }

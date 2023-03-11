@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Installer : MonoBehaviour
+public class UIInstaller : MonoBehaviour
 {
     [SerializeField] BulletViews bulletViews;
     [SerializeField] private Weapon weapon;

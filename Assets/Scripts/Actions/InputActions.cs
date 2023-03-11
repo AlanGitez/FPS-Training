@@ -75,12 +75,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""player.move"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""86758d70-ff10-474d-a8ed-c1377ada24dc"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""player.jump"",

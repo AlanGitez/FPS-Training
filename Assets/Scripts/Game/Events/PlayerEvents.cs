@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace Assets.Scripts.Game.Events
@@ -11,5 +10,5 @@ namespace Assets.Scripts.Game.Events
     public class OnPlayerJumpEvent : UnityEvent<float> { }
 
     [System.Serializable]
-    public class OnPlayerRotateEvent : UnityEvent<float> { }
+    public class OnPlayerRotateEvent : UnityEvent<Vector3> { }
 }

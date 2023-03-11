@@ -8,6 +8,6 @@ namespace Assets.Scripts.Game.UseCase.Player
     {
 
         OnPlayerJumpEvent OnPlayerJumpEvent { get; }
-        void OnPlayerJump(float jumpPower);
+        void PerformJump(Rigidbody rb, float jumpPower, out bool isJump);
     }
 }
