@@ -86,6 +86,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "inventory",
+                    "type": "Button",
+                    "id": "3ff41c22-a16e-4215-ad83-ecdd502d06c4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(pressPoint=1)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -218,6 +227,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "player.changeCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfecf01d-9166-49dd-abc1-706449aaf6b9",
+                    "path": "<Keyboard>/i",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

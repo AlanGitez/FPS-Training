@@ -16,31 +16,31 @@ public class Enemy
         this.strength = strength;
     }
 
-    public DamageData receiveDamageFrom(Hero hero) {
+    //public DamageData receiveDamageFrom(Hero hero) {
 
-        var damage = hero.strength;
+    //    var damage = hero.strength;
 
-        if (!isDead) { 
-            currentHealt -= damage;
+    //    if (!isDead) { 
+    //        currentHealt -= damage;
 
-            if (currentHealt <= 0) {
-                currentHealt = 0;
+    //        if (currentHealt <= 0) {
+    //            currentHealt = 0;
 
-                concedeRewardsTo(hero);
+    //            concedeRewardsTo(hero);
 
-                isDead = true;
-            }
-        }
+    //            isDead = true;
+    //        }
+    //    }
 
 
-        return new DamageData(hero.id, id, damage, currentHealt);
-    }
+    //    return new DamageData(hero.id, id, damage, currentHealt);
+    //}
 
-    public RewardsData concedeRewardsTo(Hero hero) {
+    //public RewardsData concedeRewardsTo(Hero hero) {
 
-        var randomExperience = Random.Range(1, maxDropsExperience);
-        var randomMoney = Random.Range(1, maxDropsMoney); 
+    //    var randomExperience = Random.Range(1, maxDropsExperience);
+    //    var randomMoney = Random.Range(1, maxDropsMoney); 
 
-        return new RewardsData(hero.id, randomExperience, randomMoney);
-    }
+    //    return new RewardsData(hero.id, randomExperience, randomMoney);
+    //}
 }

@@ -108,6 +108,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ff41c22-a16e-4215-ad83-ecdd502d06c4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(pressPoint=1)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -242,6 +251,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""player.changeCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cfecf01d-9166-49dd-abc1-706449aaf6b9"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -259,6 +279,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_InGame_playerjump = m_InGame.FindAction("player.jump", throwIfNotFound: true);
         m_InGame_playercrouch = m_InGame.FindAction("player.crouch", throwIfNotFound: true);
         m_InGame_playerchangeCamera = m_InGame.FindAction("player.changeCamera", throwIfNotFound: true);
+        m_InGame_inventory = m_InGame.FindAction("inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +393,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_playerjump;
     private readonly InputAction m_InGame_playercrouch;
     private readonly InputAction m_InGame_playerchangeCamera;
+    private readonly InputAction m_InGame_inventory;
     public struct InGameActions
     {
         private @InputActions m_Wrapper;
@@ -382,6 +404,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @playerjump => m_Wrapper.m_InGame_playerjump;
         public InputAction @playercrouch => m_Wrapper.m_InGame_playercrouch;
         public InputAction @playerchangeCamera => m_Wrapper.m_InGame_playerchangeCamera;
+        public InputAction @inventory => m_Wrapper.m_InGame_inventory;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -409,6 +432,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @playerchangeCamera.started += instance.OnPlayerchangeCamera;
             @playerchangeCamera.performed += instance.OnPlayerchangeCamera;
             @playerchangeCamera.canceled += instance.OnPlayerchangeCamera;
+            @inventory.started += instance.OnInventory;
+            @inventory.performed += instance.OnInventory;
+            @inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -431,6 +457,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @playerchangeCamera.started -= instance.OnPlayerchangeCamera;
             @playerchangeCamera.performed -= instance.OnPlayerchangeCamera;
             @playerchangeCamera.canceled -= instance.OnPlayerchangeCamera;
+            @inventory.started -= instance.OnInventory;
+            @inventory.performed -= instance.OnInventory;
+            @inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -460,5 +489,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnPlayerjump(InputAction.CallbackContext context);
         void OnPlayercrouch(InputAction.CallbackContext context);
         void OnPlayerchangeCamera(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }
